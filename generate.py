@@ -52,11 +52,12 @@ def js_videos_array(videos):
 
 
 def cover_image_url(slug, drive_id):
-    """Pakai cover custom kalau filenya ada di covers/, kalau tidak fallback
-    ke thumbnail otomatis Google Drive."""
-    cover_path = os.path.join(ROOT, "covers", f"{slug}.jpg")
-    if os.path.exists(cover_path):
-        return f"{SITE_BASE_URL}covers/{slug}.jpg"
+    """Pakai cover custom kalau filenya ada di covers/ (boleh .jpg/.jpeg/.png/.webp),
+    kalau tidak ada fallback ke thumbnail otomatis Google Drive."""
+    for ext in ("jpg", "jpeg", "png", "webp"):
+        cover_path = os.path.join(ROOT, "covers", f"{slug}.{ext}")
+        if os.path.exists(cover_path):
+            return f"{SITE_BASE_URL}covers/{slug}.{ext}"
     return f"https://drive.google.com/thumbnail?id={drive_id}&sz=w1200"
 
 
