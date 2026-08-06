@@ -1,0 +1,34 @@
+name: Generate situs Video Bercocok Tanam
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "videos.json"
+      - "templates/**"
+      - "covers/**"
+      - "generate.py"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Jalankan generator
+        run: python3 generate.py
+
+      - name: Commit hasil generate
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-generate halaman situs dari videos.json"
