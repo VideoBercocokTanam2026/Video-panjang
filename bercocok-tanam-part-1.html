@@ -312,6 +312,12 @@
 
   const VIDEOS = [
     {
+      judul: "Bercocok Tanam Part 8",
+      deskripsi: "",
+      driveLink: "https://drive.google.com/file/d/1bttcBT9ni-CCWQRaX4GAyCNhPf5M46x8/view",
+      tanggal: "7 Agustus 2026"
+    },
+    {
       judul: "Bercocok Tanam Part 6",
       deskripsi: "",
       driveLink: "https://drive.google.com/file/d/1saCcUqTVAkb_H2Y6gMDEf7648rPc2jXs/view",
@@ -420,6 +426,15 @@
       .replace(/(^-|-$)/g, '');
   }
 
+  // Nomor episode diambil dari angka di akhir judul (mis. "...Part 8" -> 8),
+  // bukan dari posisi/urutan di array. Ini supaya EPISODE tetap sesuai judul
+  // walau ada nomor yang dilewati (mis. Part 7 belum diupload).
+  function getEpisodeNumber(v, i){
+    const m = v.judul.match(/(\d+)\s*$/);
+    if(m) return parseInt(m[1], 10);
+    return VIDEOS.length - i;
+  }
+
   function makeVideoFrame(driveId, judul, autoLoad, linkToPage){
     const frame = document.createElement(autoLoad ? 'div' : 'a');
     frame.className = 'video-frame';
@@ -440,7 +455,7 @@
     if(targetIndex === -1) return;
 
     const v = VIDEOS[targetIndex];
-    const episodeNumber = VIDEOS.length - targetIndex;
+    const episodeNumber = getEpisodeNumber(v, targetIndex);
 
     const mainWrap = document.getElementById('main-video');
     const card = document.createElement('div');

@@ -363,9 +363,9 @@
      ===================================================================== */
   const VIDEOS = [
     {
-      judul: "Bercocok Tanam Part 7",
+      judul: "Bercocok Tanam Part 8",
       deskripsi: "",
-      driveLink: "https://drive.google.com/file/d/1qB0y-it0_6VhDz6h1PA0VeNxZpE2FTyd/view",
+      driveLink: "https://drive.google.com/file/d/1bttcBT9ni-CCWQRaX4GAyCNhPf5M46x8/view",
       tanggal: "7 Agustus 2026"
     },
     {
@@ -467,6 +467,15 @@
     }
   }
 
+  // Nomor episode diambil dari angka di akhir judul (mis. "...Part 8" -> 8),
+  // bukan dari posisi/urutan di array. Ini supaya badge EP tetap sesuai judul
+  // walau ada nomor yang dilewati (mis. Part 7 belum diupload).
+  function getEpisodeNumber(v, i){
+    const m = v.judul.match(/(\d+)\s*$/);
+    if(m) return parseInt(m[1], 10);
+    return VIDEOS.length - i;
+  }
+
   function extractDriveId(link){
     const patterns = [
       /\/d\/([a-zA-Z0-9_-]{10,})/,
@@ -508,7 +517,7 @@
     let adRowIndex = 0;
 
     VIDEOS.forEach((v, i) => {
-      const episodeNumber = VIDEOS.length - i;
+      const episodeNumber = getEpisodeNumber(v, i);
       const isLatest = i === 0;
       const driveId = extractDriveId(v.driveLink);
 
