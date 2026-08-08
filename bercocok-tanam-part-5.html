@@ -10,14 +10,14 @@
 <meta property="og:type" content="video.other">
 <meta property="og:title" content="Bercocok Tanam Part 5">
 <meta property="og:description" content="Kumpulan video bercocok tanam berepisode, dari bibit sampai panen.">
-<meta property="og:url" content="https://videobercocoktanam2026.github.io/Video-panjang/bercocok-tanam-part-5.html">
-<meta property="og:image" content="https://videobercocoktanam2026.github.io/Video-panjang/covers/bercocok-tanam-part-5.jpg">
+<meta property="og:url" content="https://videobercocoktanam2026.github.io/kebun/bercocok-tanam-part-5.html">
+<meta property="og:image" content="https://drive.google.com/thumbnail?id=11CGYcRY8K1SdUSynasDWkeiKIRgK9YXl&sz=w1200">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="1200">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bercocok Tanam Part 5">
 <meta name="twitter:description" content="Kumpulan video bercocok tanam berepisode, dari bibit sampai panen.">
-<meta name="twitter:image" content="https://videobercocoktanam2026.github.io/Video-panjang/covers/bercocok-tanam-part-5.jpg">
+<meta name="twitter:image" content="https://drive.google.com/thumbnail?id=11CGYcRY8K1SdUSynasDWkeiKIRgK9YXl&sz=w1200">
 
 <!-- IKLAN ADSTERRA — POPUNDER (aktif di seluruh halaman) -->
 <script src="https://pl30677988.effectivecpmnetwork.com/3b/37/e2/3b37e254b77bbbdd9815f86b60261fe5.js"></script>
@@ -312,6 +312,18 @@
 
   const VIDEOS = [
     {
+      judul: "Bercocok Tanam Part 10",
+      deskripsi: "",
+      driveLink: "https://drive.google.com/file/d/1tp-8TDhxlsTWdVJqcx94T-MsaMeX1a2Q/view",
+      tanggal: "8 Agustus 2026"
+    },
+    {
+      judul: "Bercocok Tanam Part 9",
+      deskripsi: "",
+      driveLink: "https://drive.google.com/file/d/1dNbOT-XXVnz0DEglavr7sZ1ETO0xdnxG/view",
+      tanggal: "7 Agustus 2026"
+    },
+    {
       judul: "Bercocok Tanam Part 8",
       deskripsi: "",
       driveLink: "https://drive.google.com/file/d/1bttcBT9ni-CCWQRaX4GAyCNhPf5M46x8/view",
@@ -426,15 +438,6 @@
       .replace(/(^-|-$)/g, '');
   }
 
-  // Nomor episode diambil dari angka di akhir judul (mis. "...Part 8" -> 8),
-  // bukan dari posisi/urutan di array. Ini supaya EPISODE tetap sesuai judul
-  // walau ada nomor yang dilewati (mis. Part 7 belum diupload).
-  function getEpisodeNumber(v, i){
-    const m = v.judul.match(/(\d+)\s*$/);
-    if(m) return parseInt(m[1], 10);
-    return VIDEOS.length - i;
-  }
-
   function makeVideoFrame(driveId, judul, autoLoad, linkToPage){
     const frame = document.createElement(autoLoad ? 'div' : 'a');
     frame.className = 'video-frame';
@@ -455,7 +458,7 @@
     if(targetIndex === -1) return;
 
     const v = VIDEOS[targetIndex];
-    const episodeNumber = getEpisodeNumber(v, targetIndex);
+    const episodeNumber = VIDEOS.length - targetIndex;
 
     const mainWrap = document.getElementById('main-video');
     const card = document.createElement('div');
